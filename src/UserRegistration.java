@@ -52,5 +52,10 @@ public class UserRegistration {
     public void setPassword(String password) {
         this.password = password;
     }
+    public boolean validateFirstName() {
+        return firstName != null && 
+               firstName.matches("^[A-Z][a-zA-Z]{2,}$");
+    }
+
 
 }
