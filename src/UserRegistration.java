@@ -13,7 +13,10 @@ public class UserRegistration {
        this.mobileNumber = mobileNumber;
        this.password = password;
     }
-    public String getFirstName() {
+    public UserRegistration() {
+		// TODO Auto-generated constructor stub
+	}
+	public String getFirstName() {
         return firstName;
     }
 
