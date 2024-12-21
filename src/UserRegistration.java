@@ -60,5 +60,13 @@ public class UserRegistration {
         return lastName != null && 
                lastName.matches("^[A-Z][a-zA-Z]{2,}$");
     }
+    public boolean validateEmail() {
+        String emailRegex = "^[a-zA-Z0-9]+([._+-][a-zA-Z0-9]+)*" +
+                            "@[a-zA-Z0-9]+([.-][a-zA-Z0-9]+)*" +
+                            "\\.[a-zA-Z]{2,}(\\.[a-zA-Z]{2,})?$";
+        
+        return email.matches(emailRegex);
+    }
+    
 
 }
