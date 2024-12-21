@@ -61,11 +61,12 @@ public class UserRegistration {
                lastName.matches("^[A-Z][a-zA-Z]{2,}$");
     }
     public boolean validateEmail() {
-        String emailRegex = "^[a-zA-Z0-9]+([._+-][a-zA-Z0-9]+)*" +
-                            "@[a-zA-Z0-9]+([.-][a-zA-Z0-9]+)*" +
-                            "\\.[a-zA-Z]{2,}(\\.[a-zA-Z]{2,})?$";
-        
-        return email.matches(emailRegex);
+    	String emailRegex = "^[a-zA-Z0-9]+([._+-]?[a-zA-Z0-9]+)*@[a-zA-Z0-9]+\\.[a-zA-Z]{2,}(\\.[a-zA-Z]{2,})?$";
+        return email.matches(emailRegex) &&
+               !email.startsWith(".") &&
+               !email.contains("..") &&
+               !email.endsWith(".") &&
+               email.chars().filter(ch -> ch == '@').count() == 1;
     }
     public boolean validateMobileNumber() {
         return mobileNumber != null && 
