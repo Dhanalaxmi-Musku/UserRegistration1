@@ -71,4 +71,7 @@ public class UserRegistration {
         return mobileNumber != null && 
                mobileNumber.matches("^91 [6-9]\\d{9}$");
     }
+    public boolean validatePassword() {
+        return password != null && password.length() >= 8;
+    }
 }
