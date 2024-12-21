@@ -1,62 +1,85 @@
 import static org.junit.jupiter.api.Assertions.*;
-
 import org.junit.jupiter.api.Test;
 
 class UserRegistrationTest {
 
-	@Test
-    public void testFirstName() {
+    @Test
+    void testFirstName() {
         // Happy Test Case
-        UserRegistration user = new UserRegistration("John", "Doe", "", "", "");
-        assertTrue(user.validateFirstName(), "Valid first name should return true");
+        UserRegistration user = new UserRegistration("John", "", "", "", "");
+        assertDoesNotThrow(() -> user.validateFirstName(), "Valid first name should not throw exception");
 
         // Sad Test Case
         user.setFirstName("jo");
-        assertFalse(user.validateFirstName(), "Invalid first name should return false");
+        UserRegistrationException exception = assertThrows(
+            UserRegistrationException.class,
+            () -> user.validateFirstName(),
+            "Invalid first name should throw exception"
+        );
+        assertEquals(UserRegistrationException.ExceptionType.INVALID_FIRST_NAME, exception.type);
     }
 
     @Test
-    public void testLastName() {
+    void testLastName() {
         // Happy Test Case
         UserRegistration user = new UserRegistration("", "Doe", "", "", "");
-        assertTrue(user.validateLastName(), "Valid last name should return true");
+        assertDoesNotThrow(() -> user.validateLastName(), "Valid last name should not throw exception");
 
         // Sad Test Case
         user.setLastName("do");
-        assertFalse(user.validateLastName(), "Invalid last name should return false");
+        UserRegistrationException exception = assertThrows(
+            UserRegistrationException.class,
+            () -> user.validateLastName(),
+            "Invalid last name should throw exception"
+        );
+        assertEquals(UserRegistrationException.ExceptionType.INVALID_LAST_NAME, exception.type);
     }
 
     @Test
-    public void testEmail() {
+    void testEmail() {
         // Happy Test Case
         UserRegistration user = new UserRegistration("", "", "abc@yahoo.com", "", "");
-        assertTrue(user.validateEmail(), "Valid email should return true");
+        assertDoesNotThrow(() -> user.validateEmail(), "Valid email should not throw exception");
 
         // Sad Test Case
         user.setEmail("abc@.com.my");
-        assertFalse(user.validateEmail(), "Invalid email should return false");
+        UserRegistrationException exception = assertThrows(
+            UserRegistrationException.class,
+            () -> user.validateEmail(),
+            "Invalid email should throw exception"
+        );
+        assertEquals(UserRegistrationException.ExceptionType.INVALID_EMAIL, exception.type);
     }
 
     @Test
-    public void testMobileNumber() {
+    void testMobileNumber() {
         // Happy Test Case
         UserRegistration user = new UserRegistration("", "", "", "91 9919819801", "");
-        assertTrue(user.validateMobileNumber(), "Valid mobile number should return true");
+        assertDoesNotThrow(() -> user.validateMobileNumber(), "Valid mobile number should not throw exception");
 
         // Sad Test Case
         user.setMobileNumber("919919819801");
-        assertFalse(user.validateMobileNumber(), "Invalid mobile number should return false");
+        UserRegistrationException exception = assertThrows(
+            UserRegistrationException.class,
+            () -> user.validateMobileNumber(),
+            "Invalid mobile number should throw exception"
+        );
+        assertEquals(UserRegistrationException.ExceptionType.INVALID_MOBILE, exception.type);
     }
 
     @Test
-    public void testPassword() {
+    void testPassword() {
         // Happy Test Case
         UserRegistration user = new UserRegistration("", "", "", "", "Abc@1234");
-        assertTrue(user.validatePassword(), "Valid password should return true");
+        assertDoesNotThrow(() -> user.validatePassword(), "Valid password should not throw exception");
 
         // Sad Test Case
         user.setPassword("abc1234");
-        assertFalse(user.validatePassword(), "Invalid password should return false");
+        UserRegistrationException exception = assertThrows(
+            UserRegistrationException.class,
+            () -> user.validatePassword(),
+            "Invalid password should throw exception"
+        );
+        assertEquals(UserRegistrationException.ExceptionType.INVALID_PASSWORD, exception.type);
     }
-
 }

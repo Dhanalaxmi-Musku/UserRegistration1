@@ -1,10 +1,11 @@
 
 public class UserRegistration {
-	private String firstName;
+    private String firstName;
     private String lastName;
     private String email;
     private String mobileNumber;
     private String password;
+
     public UserRegistration(String firstName, String lastName, String email, 
             String mobileNumber, String password) {
        this.firstName = firstName;
@@ -13,10 +14,10 @@ public class UserRegistration {
        this.mobileNumber = mobileNumber;
        this.password = password;
     }
+
     public UserRegistration() {
-		// TODO Auto-generated constructor stub
-	}
-	public String getFirstName() {
+    }
+    public String getFirstName() {
         return firstName;
     }
 
@@ -55,27 +56,56 @@ public class UserRegistration {
     public void setPassword(String password) {
         this.password = password;
     }
-    public boolean validateFirstName() {
-        return firstName != null && 
-               firstName.matches("^[A-Z][a-zA-Z]{2,}$");
+     
+    
+
+    public void validateFirstName() throws UserRegistrationException {
+        if (firstName == null || !firstName.matches("^[A-Z][a-zA-Z]{2,}$")) {
+            throw new UserRegistrationException(
+                "First name must start with capital letter and have minimum 3 characters",
+                UserRegistrationException.ExceptionType.INVALID_FIRST_NAME
+            );
+        }
     }
-    public boolean validateLastName() {
-        return lastName != null && 
-               lastName.matches("^[A-Z][a-zA-Z]{2,}$");
+
+    public void validateLastName() throws UserRegistrationException {
+        if (lastName == null || !lastName.matches("^[A-Z][a-zA-Z]{2,}$")) {
+            throw new UserRegistrationException(
+                "Last name must start with capital letter and have minimum 3 characters",
+                UserRegistrationException.ExceptionType.INVALID_LAST_NAME
+            );
+        }
     }
-    public boolean validateEmail() {
-    	String emailRegex = "^[a-zA-Z0-9]+([._+-]?[a-zA-Z0-9]+)*@[a-zA-Z0-9]+\\.[a-zA-Z]{2,}(\\.[a-zA-Z]{2,})?$";
-        return email.matches(emailRegex) &&
-               !email.startsWith(".") &&
-               !email.contains("..") &&
-               !email.endsWith(".") &&
-               email.chars().filter(ch -> ch == '@').count() == 1;
+
+    public void validateEmail() throws UserRegistrationException {
+        String emailRegex = "^[a-zA-Z0-9]+([._+-]?[a-zA-Z0-9]+)*@[a-zA-Z0-9]+\\.[a-zA-Z]{2,}(\\.[a-zA-Z]{2,})?$";
+        if (email == null || !email.matches(emailRegex) ||
+            email.startsWith(".") ||
+            email.contains("..") ||
+            email.endsWith(".") ||
+            email.chars().filter(ch -> ch == '@').count() != 1) {
+            throw new UserRegistrationException(
+                "Invalid email format",
+                UserRegistrationException.ExceptionType.INVALID_EMAIL
+            );
+        }
     }
-    public boolean validateMobileNumber() {
-        return mobileNumber != null && 
-               mobileNumber.matches("^91 [6-9]\\d{9}$");
+
+    public void validateMobileNumber() throws UserRegistrationException {
+        if (mobileNumber == null || !mobileNumber.matches("^91 [6-9]\\d{9}$")) {
+            throw new UserRegistrationException(
+                "Mobile number must start with 91 and space followed by 10 digits",
+                UserRegistrationException.ExceptionType.INVALID_MOBILE
+            );
+        }
     }
-    public boolean validatePassword() {
-        return password != null &&  password.matches("^(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%^&*()_+\\-])(?=^[^!@#$%^&*()_+\\-]*[!@#$%^&*()_+\\-][^!@#$%^&*()_+\\-]*$).{8,}$");
+
+    public void validatePassword() throws UserRegistrationException {
+        if (password == null || !password.matches("^(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%^&*()_+\\-])(?=^[^!@#$%^&*()_+\\-]*[!@#$%^&*()_+\\-][^!@#$%^&*()_+\\-]*$).{8,}$")) {
+            throw new UserRegistrationException(
+                "Password must have minimum 8 characters, at least 1 uppercase letter, 1 numeric number and exactly 1 special character",
+                UserRegistrationException.ExceptionType.INVALID_PASSWORD
+            );
+        }
     }
 }

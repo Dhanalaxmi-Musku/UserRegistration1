@@ -1,21 +1,21 @@
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.Parameterized;
+import static org.junit.Assert.*;
+import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import java.util.Arrays;
 import java.util.Collection;
 
-import static org.junit.Assert.assertEquals;
-
 @RunWith(Parameterized.class)
 public class UserRegistrationEmailTest {
-
     private final String email;
-    private final boolean expectedResult;
+    private final boolean expectedValid;
 
-    public UserRegistrationEmailTest(String email, boolean expectedResult) {
+    public UserRegistrationEmailTest(String email, boolean expectedValid) {
         this.email = email;
-        this.expectedResult = expectedResult;
+        this.expectedValid = expectedValid;
     }
 
     @Parameterized.Parameters
@@ -51,7 +51,14 @@ public class UserRegistrationEmailTest {
     @Test
     public void testEmailValidation() {
         UserRegistration userRegistration = new UserRegistration(null, null, email, null, null);
-        assertEquals(expectedResult, userRegistration.validateEmail());
+        
+        if (expectedValid) {
+            assertDoesNotThrow(() -> userRegistration.validateEmail(),
+                "Valid email " + email + " should not throw exception");
+        } else {
+            assertThrows(UserRegistrationException.class,
+                () -> userRegistration.validateEmail(),
+                "Invalid email " + email + " should throw exception");
+        }
     }
 }
-

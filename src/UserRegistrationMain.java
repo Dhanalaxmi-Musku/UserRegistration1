@@ -8,7 +8,7 @@ public class UserRegistrationMain {
 	            "91 9919819801", 
 	            "shortP@2"
 	        );
-	        System.out.println("First Name Validation: " + user1.validateFirstName());
+	       /* System.out.println("First Name Validation: " + user1.validateFirstName());
 	        System.out.println("Last Name Validation: " + user1.validateLastName());
 	        System.out.println("Email Validation: " + user1.validateEmail());
 	        System.out.println("Mobile Number Validation: " + user1.validateMobileNumber());
@@ -25,7 +25,7 @@ public class UserRegistrationMain {
 	         System.out.println("Last Name Validation: " + user2.validateLastName());
 	         System.out.println("Email Validation: " + user2.validateEmail());
 	         System.out.println("Mobile Number Validation: " + user2.validateMobileNumber());
-	         System.out.println("Password Validation: "+user2.validatePassword());*/
+	         System.out.println("Password Validation: "+user2.validatePassword());
 	         String[] validEmails = {
 	                 "abc@yahoo.com", "abc-100@yahoo.com", "abc.100@yahoo.com", "abc111@abc.com",
 	                 "abc-100@abc.net", "abc.100@abc.com.au", "abc@1.com", "abc@gmail.com.com", "abc+100@gmail.com"
@@ -47,7 +47,7 @@ public class UserRegistrationMain {
 	             for (String email : invalidEmails) {
 	            	 user1.setEmail(email);
 	                 System.out.println(email + ": " + user1.validateEmail());
-	             }
+	             }*/
 		
 	}
 }
