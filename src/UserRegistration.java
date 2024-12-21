@@ -67,6 +67,8 @@ public class UserRegistration {
         
         return email.matches(emailRegex);
     }
-    
-
+    public boolean validateMobileNumber() {
+        return mobileNumber != null && 
+               mobileNumber.matches("^91 [6-9]\\d{9}$");
+    }
 }
