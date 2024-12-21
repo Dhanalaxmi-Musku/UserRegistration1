@@ -6,7 +6,7 @@ public class UserRegistrationMain {
 	            "Doe", 
 	            "john.doe@example.com", 
 	            "91 9919819801", 
-	            "shortPa2"
+	            "shortP@2"
 	        );
 	        System.out.println("First Name Validation: " + user1.validateFirstName());
 	        System.out.println("Last Name Validation: " + user1.validateLastName());
@@ -18,7 +18,7 @@ public class UserRegistrationMain {
 	                "Doe", 
 	                "john.doe@example.com", 
 	                "91 9919819801", 
-	                "shortPassword"
+	                "shortPass33"
 	            );
 
 	         System.out.println("First Name Validation: " + user2.validateFirstName());
